@@ -6,6 +6,11 @@ use PDO;
 class db
 {
     private static Pull $_pull;
+
+    public static function setPDO(PDO $pdo): void {
+        $_ENV['nv-db']['pdo'] = $pdo;
+    }
+
     public static function connect(string $type = 'mysql', string $host='localhost', string $user = 'root', string $dbname = '', string $password = '', string $port = null){
         $_ENV['nv-db']['type'] = $type;
         $_ENV['nv-db']['host'] = $host;

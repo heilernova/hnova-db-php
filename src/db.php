@@ -9,6 +9,7 @@ class db
 
     public static function setPDO(PDO $pdo): void {
         $_ENV['nv-db']['pdo'] = $pdo;
+        self::$_pull = new Pull();
     }
 
     public static function connect(string $type = 'mysql', string $host='localhost', string $user = 'root', string $dbname = '', string $password = '', string $port = null){

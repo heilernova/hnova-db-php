@@ -37,6 +37,14 @@ class Pull
 
 
         try {
+
+            if ( $params ){
+                foreach ( $params as $key => $value ){
+                    if (is_object( $value ) || is_array( $value )) {
+                        $params[$key] = json_encode( $value );
+                    }
+                }
+            }
             
             $this->stmt->execute($params);
             return new Result($this->stmt);

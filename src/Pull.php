@@ -23,6 +23,14 @@ class Pull
         throw $error;
     }
 
+    public function beginTransaccion(): bool {
+        return $this->pdo->beginTransaction();
+    }
+
+    public function commit():bool{
+        return $this->pdo->commit();
+    }
+
     /**
      * @param string $sql Comando sql a ejecutar el la base de datos.
      * @param array $params array de los parametros para consultas preparadas
@@ -34,7 +42,6 @@ class Pull
         } catch (\Throwable $err) {
             $this->errorHandling(new Exception("*** Error al preparar la consulta SQL ***\n" . $err->getMessage() . "\n\nSQL: " . $sql, (int)$err->getCode(), $err->getPrevious()));
         }
-
 
         try {
 

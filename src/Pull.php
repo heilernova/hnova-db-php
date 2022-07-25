@@ -84,7 +84,13 @@ class Pull
 
         foreach ($params as $key => $value){
             $fields .= ", $key";
-            $values .= ", :$key";
+            if ( is_bool($value) ){
+                $values .= ", " . ( $value ? "TRUE" : 'FALSE' );
+                unset($params[$key]);
+            }
+            else{
+                $values .= ", :$key";
+            }
         }
 
         $fields = ltrim($fields, ', ');
@@ -117,7 +123,12 @@ class Pull
         $values = "";
         $condit = "";
         foreach ( $params as $key => $value ){
-            $values .= ", $key=:$key";
+            if ( is_bool($value) ){
+                $values .= ", $key=" . ( $value ? "TRUE" : "FALSE" );
+                unset( $params[$key] );
+            }else{
+                $values .= ", $key=:$key";
+            }
         }
         $values = ltrim($values, ', ');
 
